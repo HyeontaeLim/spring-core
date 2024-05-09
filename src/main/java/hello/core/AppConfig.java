@@ -14,21 +14,24 @@ public class AppConfig {
 
     @Bean
     public MemberService memberService() {
-        return new MemberServiceImpl(MemberRepository());
+        System.out.println("AppConfig.memberService");
+        return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
-    private static MemoryMemberRepository MemberRepository() {
+    public MemoryMemberRepository memberRepository() {
+        System.out.println("AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
-        return new OrderServiceImpl(MemberRepository(), DiscountPolicy());
+        System.out.println("AppConfig.orderService");
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean
-    private static RateDiscountPolicy DiscountPolicy() {
+    public RateDiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
 }
